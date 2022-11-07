@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active">
+            <ngx-fa name="home"></ngx-fa> Home
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+            aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01" [ngClass]="{ show: isExpanded }">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i> Management</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" [routerLink]="['/subscriptions']" routerLinkActive="router-link-active" > <i class="fa fa-caret-right"></i> Subscriptions</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" *ngIf="status.isLoggedIn()">
+                    <a class="nav-link dropdown-toggle hide hide-mobile" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="true" aria-expanded="true">
+                        <ngx-fa name="user" [animation]="false"></ngx-fa> {{status.user?.fullName}}
+                    </a>
+                    <div class="dropdown-menu hide hide-mobile" data-bs-popper="static">
+                        <button (click)="logout()" class="dropdown-item" type="button" title="Sign out of the system">
+                            <ngx-fa name="sign-out" [animation]="false"></ngx-fa>
+                            Sign out
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <div *ngIf="!status.isLoggedIn()">
+                <form class="d-flex" [formGroup]="form" (submit)="login(form.value)">
+                    <input class="form-control me-sm-2" autocomplete="username" formControlName="userName" type="text"
+                        placeholder="Username">
+                    <div class="input-group">
+                        <div class="input-group-text" (click)="showPass = !showPass">
+                            <ngx-fa [name]="showPass ? 'unlock' : 'lock'"></ngx-fa>
+                        </div>
+                        <input class="form-control me-sm-2" autocomplete="current-password" formControlName="password"
+                            type="{{showPass? 'text' : 'password'}}" placeholder="Password">
+                    </div>
+                    <button [disabled]="form.invalid || form.pristine" class="btn my-2 my-sm-0"
+                        [ngClass]="form.invalid ? 'btn-danger' : 'btn-success'" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,12 @@
+<div class="alert-box">
+    <div class="modal-header">
+        <h2 class="modal-title">Confirm action</h2>
+    </div>
+    <div class="modal-body">
+        {{msg}}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="close(true)">Yes</button>
+        <button type="button" class="btn btn-outline-danger" (click)="close(false)">No</button>
+    </div>
+</div>

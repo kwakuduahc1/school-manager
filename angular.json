@@ -1,12 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@angular-eslint/schematics",
+    "analytics": false
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-electron": {
+    "teaching-assistant": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -18,7 +19,7 @@
           "style": "scss"
         }
       },
-      "prefix": "app",
+      "prefix": "bs",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -34,9 +35,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/@popperjs/core/dist/umd/popper-lite.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/printthis/printThis.js"
+            ],
             "customWebpackConfig": {
               "path": "./angular.webpack.js",
               "replaceDuplicatePlugins": true
@@ -112,27 +122,27 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "teaching-assistant:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "angular-electron:build:dev"
+              "browserTarget": "teaching-assistant:build:dev"
             },
             "production": {
-              "browserTarget": "angular-electron:build:production"
+              "browserTarget": "teaching-assistant:build:production"
             },
             "web": {
-              "browserTarget": "angular-electron:build:web"
+              "browserTarget": "teaching-assistant:build:web"
             },
             "web-production": {
-              "browserTarget": "angular-electron:build:web-production"
+              "browserTarget": "teaching-assistant:build:web-production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "teaching-assistant:build"
           }
         },
         "test": {
@@ -168,7 +178,7 @@
         }
       }
     },
-    "angular-electron-e2e": {
+    "teaching-assistant-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {
@@ -183,5 +193,5 @@
       }
     }
   },
-  "defaultProject": "angular-electron"
+  "defaultProject": "teaching-assistant"
 }
