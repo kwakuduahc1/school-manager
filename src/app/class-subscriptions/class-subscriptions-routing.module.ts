@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProgramsListResolvers } from '../setup/class-resolvers';
+import { ProgramsListResolvers } from '../programs/programs-resolvers';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 const routes: Routes = [

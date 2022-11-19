@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FindClassScheduleTypesResolvers } from '../exam-schedule/exams-schedule-resolver';
-import { FindClassResolvers } from '../setup/class-resolvers';
+import { FindClassResolvers } from '../classes/class-resolvers';
 import { ClassReportComponent } from './components/class-report/class-report.component';
 import { DataEntryComponent } from './components/data-entry/data-entry.component';
 import { ViewResultsComponent } from './components/view-results/view-results.component';

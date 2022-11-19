@@ -5,12 +5,14 @@ import { ProgramsRoutingModule } from './programs-routing.module';
 import { ListProgramsComponent } from './components/list-programs/list-programs.component';
 import { EditProgramComponent } from './components/edit-program/edit-program.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoordinatorsComponent } from './components/coordinators/coordinators.component';
 
 
 @NgModule({
   declarations: [
     ListProgramsComponent,
-    EditProgramComponent
+    EditProgramComponent,
+    CoordinatorsComponent
   ],
   imports: [
     CommonModule,

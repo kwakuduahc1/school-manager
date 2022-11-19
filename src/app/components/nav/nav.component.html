@@ -14,20 +14,27 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"> <i class="fa fa-level-down" aria-hidden="true"></i> Administration</a>
+                        aria-haspopup="true" aria-expanded="false"> <i class="fa fa-level-down" aria-hidden="true"></i>
+                        Administration</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="['/programs']" routerLinkActive="router-link-active" > <i class="fa fa-book" aria-hidden="true"></i> Programs </a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" [routerLink]="['/programs']" routerLinkActive="router-link-active"> <i
+                                class="fa fa-book" aria-hidden="true"></i> Programs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" routerLink="/administration/register"
+                            routerLinkActive="router-link-active"><i class="fa fa-user-o" aria-hidden="true"></i>
+                            Users</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/classes']" routerLinkActive="router-link-active"> <i
+                                class="fa fa-share" aria-hidden="true"></i> Classes</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i> Management</a>
+                        aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i>
+                        Management</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" [routerLink]="['/subscriptions']" routerLinkActive="router-link-active" > <i class="fa fa-caret-right"></i> Subscriptions</a>
+                        <a class="dropdown-item" [routerLink]="['/subscriptions']"
+                            routerLinkActive="router-link-active"> <i class="fa fa-caret-right"></i> Subscriptions</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                         <div class="dropdown-divider"></div>

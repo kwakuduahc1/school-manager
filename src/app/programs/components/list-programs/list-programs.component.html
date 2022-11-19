@@ -52,6 +52,7 @@
             <th>Program</th>
             <th>Code</th>
             <th>Edit</th>
+            <th>Coordinators</th>
         </tr>
         </thead>
         <tbody>
@@ -63,11 +64,11 @@
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                 </td>
-            </tr>
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <button title="Select the coordinators for this program" class="btn btn-outline-primary" type="button" routerLink="/programs/{{p.programsID}}/coordinators" routerLinkActive="router-link-active" >
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
 </table>

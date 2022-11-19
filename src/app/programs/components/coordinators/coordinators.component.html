@@ -1,0 +1,48 @@
+<h1 class="h1 text-primary text-center">{{prg.programCode}} coordinators</h1>
+<form name="form" id="form" [formGroup]="form" (submit)="add(form.controls['tutor'].value)">
+    <fieldset>
+        <legend class="text-center">Assign coordinator</legend>
+        <div class="row g-3">
+            <div class="form-floating mb-3 col-sm-3">
+                <select type="text" class="form-control" id="tutor" title="tutor" formControlName="tutor">
+                    <option *ngFor="let p of users" [ngValue]="p">{{p.fullName}}</option>
+                </select>
+                <label
+                    [ngClass]="form.controls.tutor.touched && form.controls.tutor.invalid  ? 'text-danger' : 'text-success'"
+                    for="tutor" aria-label="tutor">Tutors
+                    <span>
+                        <small [ngClass]="form.controls.tutor.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.tutor.errors?.required">*</small>
+                    </span>
+                </label>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn" title="Save details" [disabled]="form.invalid || act.isProcessing"
+                    [ngClass]="!form.pristine && form.invalid ? 'btn-outline-danger' : 'btn-outline-success'">
+                    <i class="fa fa-save" aria-hidden="true"></i>
+
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<h3 class="h3 text-center">List of class coordinators</h3>
+<table class="table table-striped table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of crds">
+            <td>{{t.fullName}}</td>
+            <td>
+                <button (click)="remove(t)" class="btn btn-outline-danger"
+                    title="Remove {{t.fullName}} as a coordinator" type="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Remove
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,3 +1,5 @@
+import { IUsers } from './IUsers';
+
 export interface AssessmentTypes {
     typesID: number;
     typeName: string;
@@ -78,4 +80,14 @@ export interface Students {
     studentsID: number;
     fullName: string;
     indexNumber: string;
+}
+
+export interface Coordinators {
+    coordinatorsID: number;
+    userID: string;
+    programsID: number;
+    teacherName: string;
+    applicationUser: IUsers;
+    programs: Programs;
+    fullName: string;
 }

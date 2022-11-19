@@ -1,0 +1,90 @@
+<h1 class="h1">Register</h1>
+<form name="form" id="form" [formGroup]="form" (submit)="register(form.value)">
+    <fieldset>
+        <legend color="primary" class="text-center">New</legend>
+        <div class="row g-3">
+            <div class="form-floating mb-3 col-sm-2">
+                <input type="text" class="form-control" id="userName" title="userName" formControlName="userName" placeholder="userName">
+                <label [ngClass]="form.controls['userName'].touched && form.controls['userName'].invalid  ? 'text-danger' : 'text-success'" for="userName" aria-label="userName">User Name
+                    <span>
+                        <small [ngClass]="form.controls['userName'].errors?.maxlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['userName'].errors?.maxlength">
+                            {{form.controls['userName'].errors?.maxlength.requiredLength}}/{{form.controls['userName'].errors?.maxlength.actualLength}}</small>
+                        <small [ngClass]="form.controls['userName'].errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls['userName'].errors?.required">*</small>
+                        <small [ngClass]="form.controls['userName'].errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['userName'].errors?.minlength">
+                            {{form.controls['userName'].errors?.minlength.requiredLength}}/{{form.controls['userName'].errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="form-floating mb-3 col-sm-2">
+                <input type="text" class="form-control" id="fullName" title="fullName" formControlName="fullName" placeholder="fullName">
+                <label [ngClass]="form.controls['fullName'].touched && form.controls['fullName'].invalid  ? 'text-danger' : 'text-success'" for="fullName" aria-label="fullName">Full Name
+                    <span>
+                        <small [ngClass]="form.controls['fullName'].errors?.maxlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['fullName'].errors?.maxlength">
+                            {{form.controls['fullName'].errors?.maxlength.requiredLength}}/{{form.controls['fullName'].errors?.maxlength.actualLength}}</small>
+                        <small [ngClass]="form.controls['fullName'].errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls['fullName'].errors?.required">*</small>
+                        <small [ngClass]="form.controls['fullName'].errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['fullName'].errors?.minlength">
+                            {{form.controls['fullName'].errors?.minlength.requiredLength}}/{{form.controls['fullName'].errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="form-floating mb-3 col-sm-2">
+                <input type="password" class="form-control" id="password" title="" formControlName="password" placeholder="Password">
+                <label [ngClass]="form.controls.password.touched && form.controls.password.invalid  ? 'text-danger' : 'text-success'" for="password" aria-label="password">Password
+                    <span>
+                        <small [ngClass]="form.controls.password.errors?.maxlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.password.errors?.maxlength">
+                            {{form.controls.password.errors?.maxlength.requiredLength}}/{{form.controls.password.errors?.maxlength.actualLength}}</small>
+                        <small [ngClass]="form.controls.password.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.password.errors?.required">*</small>
+                        <small [ngClass]="form.controls.password.errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.password.errors?.minlength">
+                            {{form.controls.password.errors?.minlength.requiredLength}}/{{form.controls.password.errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="form-floating mb-3 col-sm-2">
+                <input type="password" class="form-control" id="confirmPassword" title="" formControlName="confirmPassword" placeholder="confirmPassword">
+                <label [ngClass]="form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid  ? 'text-danger' : 'text-success'" for="confirmPassword" aria-label="confirmPassword">Confirm Password
+                    <span>
+                        <small [ngClass]="form.controls.confirmPassword.errors?.maxlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.confirmPassword.errors?.maxlength">
+                            {{form.controls.confirmPassword.errors?.maxlength.requiredLength}}/{{form.controls.confirmPassword.errors?.maxlength.actualLength}}</small>
+                        <small [ngClass]="form.controls.confirmPassword.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.confirmPassword.errors?.required">*</small>
+                        <small [ngClass]="form.controls.confirmPassword.errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.confirmPassword.errors?.minlength">
+                            {{form.controls.confirmPassword.errors?.minlength.requiredLength}}/{{form.controls.confirmPassword.errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="form-floating mb-3 col-sm-2">
+                <select class="form-control" id="role" title="Select the role for the user" formControlName="role" placeholder="role">
+                    <option *ngFor="let r of roles" [ngValue]="r.name">{{r.name}}</option>
+                </select>
+                <label [ngClass]="form.controls.role.touched && form.controls.role.invalid  ? 'text-danger' : 'text-success'" for="role" aria-label="role">Role
+                    <span>
+                        <small [ngClass]="form.controls.role.errors?.maxlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.role.errors?.maxlength">
+                            {{form.controls.role.errors?.maxlength.requiredLength}}/{{form.controls.role.errors?.maxlength.actualLength}}</small>
+                        <small [ngClass]="form.controls.role.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.role.errors?.required">*</small>
+                        <small [ngClass]="form.controls.role.errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls.role.errors?.minlength">
+                            {{form.controls.role.errors?.minlength.requiredLength}}/{{form.controls.role.errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="col-2">
+                <button type="submit" title="Add to the list of teachers" class="btn" [disabled]="form.invalid || act.isProcessing" [ngClass]="!form.pristine && form.invalid ? 'btn-outline-warning' : 'btn-outline-success'">
+                   <i class="fa fa-save" aria-hidden="true"></i> Register
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>

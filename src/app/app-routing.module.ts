@@ -4,7 +4,7 @@ import { SubscriptionsResolvers } from './class-subscriptions/subscription-resol
 import { HomeComponent } from './components/home/home.component';
 import { ClassSchedulesResolvers } from './exam-schedule/exams-schedule-resolver';
 import { FindProgramTypesResolvers, ProgramTypesResolvers } from './exam-types/program-types-resolver';
-import { FindClassResolvers } from './setup/class-resolvers';
+import { ClassesListResolvers, FindClassResolvers } from './classes/class-resolvers';
 
 const routes: Routes = [
   {
@@ -16,8 +16,12 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     resolve: {
-      classes: SubscriptionsResolvers
+      // classes: ClassesListResolvers
     }
+  },
+  {
+    path: 'administration',
+    loadChildren: () => import('./system-administration/system-administration.module').then(x => x.SystemAdministrationModule)
   },
   {
     path: 'programs',
