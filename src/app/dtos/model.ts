@@ -36,6 +36,8 @@ export interface Classes {
     programCode: string;
     programTitle: string;
     isActive: boolean;
+    students: Students | number;
+    semestersID: number;
 }
 export interface ClassAssessments {
     assessmentsID: number;
