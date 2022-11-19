@@ -15,4 +15,8 @@ export class ProgramsHttpService {
     classes(id: number): Observable<Classes[]> {
         return this.http.get<Classes[]>(APP_CONFIG.url + `Classes/Programs?id=${id}`);
     }
+
+    findclass(id: number): Observable<Classes> {
+        return this.http.get<Classes>(APP_CONFIG.url + `Classes/Find?id=${id}`);
+    }
 }

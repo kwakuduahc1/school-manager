@@ -1,17 +1,17 @@
 <h1 class="h1 text-primary text-center">Your subscriptions</h1>
 <div class="row">
-    <div class="card col-sm-6" *ngFor="let c of classes">
+    <div class="card col-sm-4" *ngFor="let c of classes">
         <div class="card-body">
             <h4 class="card-title">{{c.subClass}}</h4>
             <p class="card-subtitle text-muted">{{c.students}} students</p>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-outline-success" title="Upload results using a template">
-                <i class="fa fa-upload" aria-hidden="true"></i> Upload
+            <button type="button" [routerLink]="['/class-results', c.classesID]" routerLinkActive="router-link-active"
+                [disabled]="!c.isActive" class="btn btn-outline-secondary" title="View results for {{c.subClass}}">
+                <i class="fa fa-list-alt" aria-hidden="true"></i> Data entry
             </button>
-            <button type="button" [routerLink]="['/results', c.classesID]" routerLinkActive="router-link-active"
-                [disabled]="!c.isActive" class="btn btn-outline-secondary" title="Manual results entry">
-                <i class="fa fa-pencil" aria-hidden="true"></i> Manual
+            <button type="button" class="btn btn-outline-light" routerLink="/results-entry/class-report/{{c.classesID}}" [disabled]="!c.isActive || act.isProcessing" title="view the report for {{c.subClass}}">
+                <i class="fa fa-list-alt" aria-hidden="true"></i> Report
             </button>
             <button type="button" (click)="unsus(c)" class="btn btn-outline-warning card-button"
                 title="Unscubscribe from the class">

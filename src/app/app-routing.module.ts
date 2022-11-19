@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SubscriptionsResolvers } from './class-subscriptions/subscription-resolvers';
 import { HomeComponent } from './components/home/home.component';
-import { StudentsListResolvers } from './results-entry/students-resolvers';
-import { PageNotFoundComponent } from './shared/components';
+import { ClassSchedulesResolvers } from './exam-schedule/exams-schedule-resolver';
+import { FindProgramTypesResolvers, ProgramTypesResolvers } from './exam-types/program-types-resolver';
+import { FindClassResolvers } from './setup/class-resolvers';
 
 const routes: Routes = [
   {
@@ -19,24 +20,43 @@ const routes: Routes = [
     }
   },
   {
-    path: 'subscriptions',
-    loadChildren: () => import('./class-subscriptions/class-subscriptions.module').then(x => x.ClassSubscriptionsModule)
+    path: 'programs',
+    loadChildren: () => import('./programs/programs.module').then(x => x.ProgramsModule)
   },
   {
     path: 'classes',
-    loadChildren: () => import('./setup/setup.module').then(p => p.SetupModule)
+    loadChildren: () => import('./classes/classes.module').then(p => p.ClassesModule)
   },
   {
-    path: 'results/:id',
+    path: 'subscriptions',
+    loadChildren: () => import('./class-subscriptions/class-subscriptions.module').then(x => x.ClassSubscriptionsModule)
+  },
+
+  {
+    path: 'class-results/:id',
     resolve: {
-      students: StudentsListResolvers
+      class: FindClassResolvers,
+      types: ProgramTypesResolvers
     },
+    loadChildren: () => import('./class-results/class-results.module').then(x => x.ClassResultsModule)
+  },
+  {
+    path: 'results-entry',
     loadChildren: () => import('./results-entry/results-entry.module').then(x => x.ResultsEntryModule)
   },
   {
-    path: '**',
-    component: PageNotFoundComponent
+    path: 'schedule/:id/:tid',
+    resolve: {
+      class: FindClassResolvers,
+      types: FindProgramTypesResolvers,
+      schedules: ClassSchedulesResolvers
+    },
+    loadChildren: () => import('./exam-schedule/exam-schedule.module').then(x => x.ExamScheduleModule)
   },
+  // {
+  //   path: '**',
+  //   component: PageNotFoundComponent
+  // },
 ];
 
 @NgModule({

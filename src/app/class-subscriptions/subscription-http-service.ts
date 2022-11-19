@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APP_CONFIG } from '../../environments/environment';
 import { TeacherClasses } from './model';
+import { ResultsVM } from '../dtos/model';
 
 @Injectable({ providedIn: 'root' })
 export class SubscriptionsHttpService {
@@ -12,8 +13,8 @@ export class SubscriptionsHttpService {
         return this.http.get<TeacherClasses[]>(APP_CONFIG.url + `TeacherClasses/List`);
     }
 
-    add(tsc: TeacherClasses): Observable<TeacherClasses[]> {
-        return this.http.post<TeacherClasses[]>(APP_CONFIG.url + `TeacherClasses/Subscribe`, tsc);
+    add(tsc: TeacherClasses): Observable<TeacherClasses> {
+        return this.http.post<TeacherClasses>(APP_CONFIG.url + `TeacherClasses/Subscribe`, tsc);
     }
 
     remove(tsc: TeacherClasses): Observable<TeacherClasses[]> {

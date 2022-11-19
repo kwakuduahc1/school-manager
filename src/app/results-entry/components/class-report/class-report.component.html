@@ -1,0 +1,36 @@
+<h1 class="h1 text-center text-primary">Results for {{cls.subClass}}</h1>
+<div class="btn-group">
+    <button type="button" (click)="print()" title="Print this results" class="btn btn-primary">
+        <i class="fa fa-print" aria-hidden="true"></i>
+    </button>
+    <button type="button" (click)="download()" class="btn btn-light" title="Download as excel">
+        <i class="fa fa-download" aria-hidden="true"></i> Download
+    </button>
+</div>
+<table id="print" class="table table-striped table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Name</th>
+            <th>Index Number</th>
+            <th>Quizes</th>
+            <th>Assignments</th>
+            <th>Mid-Semester</th>
+            <th>Exam</th>
+        </tr>
+        <tr class="no-print">
+            <th colspan="2">
+                <input type="search" class="form-control" #dgg ngModel placeholder="Search" title="Find a student">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of report | filterBy: ['fullName', 'indexNumber']: dgg.value">
+            <td scope="row">{{r.fullName}}</td>
+            <td>{{r.indexNumber}}</td>
+            <td>{{r.quizes}}</td>
+            <td>{{r.assignment}}</td>
+            <td>{{r.midSemester}}</td>
+            <td>{{r.examination}}</td>
+        </tr>
+    </tbody>
+</table>

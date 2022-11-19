@@ -9,11 +9,19 @@ export class ClassesResolvers implements Resolve<Classes[]> {
     constructor(private http: ProgramsHttpService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<Classes[]> {
-        return this.http.classes(parseInt(route.paramMap.get("id") as string))
+        return this.http.classes(parseInt(route.paramMap.get('id') as string, 10));
+    }
+}
+
+@Injectable({ providedIn: 'root' })
+export class FindClassResolvers implements Resolve<Classes> {
+    constructor(private http: ProgramsHttpService) { }
+
+    resolve(route: ActivatedRouteSnapshot): Observable<Classes> {
+        return this.http.findclass(parseInt(route.paramMap.get('id') as string, 10));
     }
 
 }
-
 @Injectable({ providedIn: 'root' })
 export class ProgramsListResolvers implements Resolve<Programs[]> {
     constructor(private http: ProgramsHttpService) { }

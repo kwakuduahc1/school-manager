@@ -4,10 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { SubscriptionsHttpService } from '../../../class-subscriptions/subscription-http-service';
-import { ResultsVM, Students } from '../../../dtos/model';
+import { ClassAssessments, Classes, ProgramTypes, ResultsVM, Students } from '../../../dtos/model';
 import { ActivityProvider } from '../../../providers/ActivityProvider';
 import { ConfirmDialogService } from '../../../providers/confirmation-service';
+import { ResultsHttpService } from '../../results-http-service';
 
 @Component({
   selector: 'bs-data-entry',
@@ -19,31 +19,69 @@ export class DataEntryComponent implements OnInit {
   stds: Students[];
   results: ResultsVM[] = [];
   form: FormGroup;
+  tps: ClassAssessments;
+  cls: Classes;
   constructor(
     title: Title,
     route: ActivatedRoute,
     public act: ActivityProvider,
     private toast: ToastrService,
-    private http: SubscriptionsHttpService,
+    private http: ResultsHttpService,
     private conf: ConfirmDialogService) {
     title.setTitle('Home');
     this.stds = route.snapshot.data.students;
+    this.tps = route.snapshot.data.types;
+    this.cls = route.snapshot.data.class;
     this.form = new FormGroup({
       std: new FormControl<Students>(null, Validators.compose([Validators.required])),
-      score: new FormControl<number>(null, Validators.compose([Validators.required]))
+      score: new FormControl<number>(null, Validators.compose([Validators.required, Validators.max(this.tps.maxScore)]))
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   save(score: ScoresVM) {
-    this.results.push({
-      fullName: score.std.fullName,
-      indexNumber: score.std.indexNumber,
-      studentsID: score.std.studentsID,
-      score: score.score
-    } as unknown as ResultsVM);
+    if (this.results.some(f => f.studentsID === score.std.studentsID)) {
+      this.toast.error(`You have already added a score for ${score.std.fullName}`);
+    }
+    else {
+      this.results.push({
+        fullName: score.std.fullName,
+        indexNumber: score.std.indexNumber,
+        studentsID: score.std.studentsID,
+        score: score.score,
+        examID: this.tps.assessmentsID
+      });
+      this.form.reset();
+      const elem = document.getElementById('std');
+      elem.focus();
+    }
+  }
+
+  addScore() {
+    this.conf.confirm(`Do you want to save the scores`).subscribe((ans: boolean) => {
+      if (ans) {
+        this.http.add(this.results).subscribe(() => {
+          this.toast.success('The results were submitted');
+          this.results.splice(0, this.results.length);
+        });
+      }
+    });
+  }
+
+  remove(s: ResultsVM) {
+    this.conf.confirm(`Do you want to remove this entry?`).subscribe((ans: boolean) => {
+      if (ans) {
+        const ix = this.results.findIndex(x => x.studentsID === s.studentsID);
+        if (ix >= 0) {
+          this.results.splice(ix, 1);
+          this.toast.success('The entry was removed');
+        }
+        else {
+          this.toast.info('Invalid state. Refresh the page and try again');
+        }
+      }
+    });
   }
 }
 

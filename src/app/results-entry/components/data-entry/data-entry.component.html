@@ -1,10 +1,11 @@
-<h1 class="h1 text-primary text-center">Results entry</h1>
+<h1 class="h1 text-primary text-center" routerLink="/class-results/{{cls.classesID}}">Results entry for {{cls.subClass}}</h1>
+<h2 class="h2 text-center text-infor">{{tps.examName}} - Max: {{tps.maxScore}}</h2>
 <form name="form" id="form" [formGroup]="form" (submit)="save(form.value)">
     <fieldset>
-        <legend class="text-center">Assign coordinator</legend>
+        <legend class="text-center"></legend>
         <div class="row g-3">
             <div class="form-floating mb-3 col-sm-3">
-                <ng-select type="text" class="form-control" id="std" title="std" formControlName="std">
+                <ng-select type="text" name="scores" class="form-control" id="std" title="std" formControlName="std">
                     <ng-option *ngFor="let p of stds" [value]="p">{{p.fullName}}</ng-option>
                 </ng-select>
                 <label
@@ -17,7 +18,7 @@
                 </label>
             </div>
             <div class="form-floating mb-3 col-sm-3">
-                <input type="number" class="form-control" id="score" title="score" formControlName="score" placeholder="Score">
+                <input type="number" name="scores" class="form-control" id="score" title="score" formControlName="score" placeholder="Score">
                 <label [ngClass]="form.controls.score.touched && form.controls.score.invalid  ? 'text-danger' : 'text-success'" for="score" aria-label="score">Score
                     <span>
                         <small [ngClass]="form.controls.score.errors?.max ? 'text-danger' : ''"
@@ -53,12 +54,17 @@
             <td scope="row">{{s.indexNumber}}</td>
             <td>{{s.fullName}}</td>
             <td>{{s.score}}</td>
+            <td>
+                <button (click)="remove(s)" class="btn btn-outline-warning" title="Remove this entry" type="button">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+            </td>
         </tr>
     </tbody>
     <tfoot>
-        <tr>>
+        <tr>
             <td>
-                <button class="btn btn-outline-success" title="Save scores" type="button">Save</button>
+                <button (click)="addScore()" class="btn btn-outline-success" title="Save scores" type="button">Save</button>
             </td>
         </tr>
     </tfoot>

@@ -1,0 +1,48 @@
+<h1 class="h1 text-primary text-center">Edit {{prog.programTitle}}</h1>
+<form name="form" id="form" [formGroup]="form" (submit)="save(form.value)">
+    <fieldset>
+        <legend class="text-center">Assign coordinator</legend>
+        <div class="row g-3">
+            <div class="form-floating mb-3 col-sm-3">
+                <input type="text" class="form-control" id="programTitle" title="The title of the program" formControlName="programTitle" />
+                <label
+                    [ngClass]="form.controls.programTitle.touched && form.controls.programTitle.invalid  ? 'text-danger' : 'text-success'"
+                    for="programTitle" aria-label="programTitle">Title
+                    <span>
+                        <small [ngClass]="form.controls.programTitle.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.programTitle.errors?.required">*</small>
+                            <small [ngClass]="form.controls['programTitle'].errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls['programTitle'].errors?.required">*</small>
+                        <small [ngClass]="form.controls['programTitle'].errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['programTitle'].errors?.minlength">
+                            {{form.controls['programTitle'].errors?.minlength.requiredLength}}/{{form.controls['programTitle'].errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+
+            <div class="form-floating mb-3 col-sm-3">
+                <input type="text" class="form-control" id="programCode" title="The title of the program" formControlName="programCode" />
+                <label
+                    [ngClass]="form.controls.programCode.touched && form.controls.programCode.invalid  ? 'text-danger' : 'text-success'"
+                    for="programCode" aria-label="programCode">Code
+                    <span>
+                        <small [ngClass]="form.controls.programCode.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.programCode.errors?.required">*</small>
+                            <small [ngClass]="form.controls['programCode'].errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls['programCode'].errors?.required">*</small>
+                        <small [ngClass]="form.controls['programCode'].errors?.minlength ? 'text-danger' : ''"
+                            *ngIf="form.controls['programCode'].errors?.minlength">
+                            {{form.controls['programCode'].errors?.minlength.requiredLength}}/{{form.controls['programCode'].errors?.minlength.actualLength}}</small>
+                    </span>
+                </label>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn" title="Save details" [disabled]="form.invalid || act.isProcessing"
+                    [ngClass]="!form.pristine && form.invalid ? 'btn-outline-danger' : 'btn-outline-success'">
+                    <i class="fa fa-save" aria-hidden="true"></i> Save
+
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
