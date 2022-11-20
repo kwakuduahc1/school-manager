@@ -66,6 +66,15 @@ export interface ExamResults {
     classAssessments: ClassAssessments;
     students: Students;
 }
+
+export interface ClassSemesters {
+    classSemestersID: number;
+    classesID: number;
+    semestersID: number;
+    classes: Classes;
+    semesters: Semesters;
+}
+
 export interface ResultsVM {
     indexNumber: string;
     fullName: string;
