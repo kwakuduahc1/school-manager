@@ -36,6 +36,7 @@ export interface Classes {
     programCode: string;
     programTitle: string;
     isActive: boolean;
+    programsID: number;
     students: Students | number;
     semestersID: number;
 }

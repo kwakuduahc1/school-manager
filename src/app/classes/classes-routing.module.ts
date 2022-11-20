@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClassesListResolvers, FindClassResolvers } from './class-resolvers';
 import { ListClassesComponent } from './components/list-classes/list-classes.component';
-import { EditClassComponent } from './edit-class/edit-class.component';
+import { EditClassComponent } from './components/edit-class/edit-class.component';
+import { FindProgramResolvers } from '../programs/programs-resolvers';
+import { AddClassComponent } from './components/add-class/add-class.component';
 
 const routes: Routes = [
   {
@@ -21,8 +23,19 @@ const routes: Routes = [
     path: 'edit/:id',
     component: EditClassComponent,
     resolve: {
-      _class: FindClassResolvers
+      class: FindClassResolvers
     }
+  },
+  {
+    path: 'add/:id',
+    component: AddClassComponent,
+    resolve: {
+      program: FindProgramResolvers
+    }
+  },
+  {
+    path: 'manage/:id',
+    loadChildren: () => import('../class-management/class-mangement.module').then(r => r.ClassManagementModule)
   }
 ];
 

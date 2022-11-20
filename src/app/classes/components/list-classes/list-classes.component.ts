@@ -33,4 +33,15 @@ export class ListClassesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deactivate(c: Classes) {
+    this.conf.confirm('This will inactivate the class. Continue?')
+      .subscribe((ans: boolean) => {
+        if (ans) {
+          this.http.delete(c.classesID).subscribe(() => {
+            this.toast.success(`The class was ${c.isActive ? 'inactivated' : 'activated'}`);
+            c.isActive = !c.isActive;
+          });
+        }
+      });
+  }
 }

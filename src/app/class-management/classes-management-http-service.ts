@@ -5,7 +5,7 @@ import { Classes } from '../dtos/model';
 import { APP_CONFIG } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class ClassesHttpService {
+export class ClassManagementHttpService {
     constructor(private http: HttpClient) { }
 
     list(): Observable<Classes[]> {
