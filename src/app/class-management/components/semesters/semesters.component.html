@@ -13,8 +13,16 @@
         <tbody>
             <tr *ngFor="let s of sems">
                 <td scope="row">{{s.semestersID}}</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <button class="btn btn-outline-primary" routerLink="/class-courses/{{s.classSemestersID}}/list" type="button" title="Manage courses">
+                        <i class="fa fa-list" aria-hidden="true"></i> Courses
+                    </button>
+                </td>
+                <td>
+                    <button class=" btn" [ngClass]="s.isActive ? 'btn-outline-success' : 'btn-outline-danger'" type="button" title="Deactivate the courses">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> {{s.isActive ? 'Activated' : 'Deactivated'}}
+                    </button>
+                </td>
             </tr>
         </tbody>
 </table>

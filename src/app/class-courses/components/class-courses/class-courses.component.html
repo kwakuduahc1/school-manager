@@ -1,0 +1,56 @@
+<h1 class="h1 text-center text-primary">Course management for {{cls.mainName}}</h1>
+
+<div class="row">
+    <div class="col-sm-5">
+        <h2 class="h2 text-secondary">Available courses</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <input type="search" class="form-control" #dgg ngModel placeholder="Search"
+                            title="Filter courses">
+                    </td>
+                </tr>
+                <tr *ngFor="let l of list | filterBy: ['courseCode', 'courseTitle']: dgg.value">
+                    <td>{{l.courseTitle}}</td>
+                    <td>
+                        <button (click)="add(l)" [disabled]="l.selected" class="btn btn-outline-info" type="button"
+                            title="add {{l.courseTitle}} to the courses for the semester">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-7">
+        <h2 class="h2 text-bg-light">Selected courses for the semester</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Title</th>
+                    <th>Code</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of courses">
+                    <td scope="row">{{c.courseTitle}}</td>
+                    <td>{{c.courseCode}}</td>
+                    <td>
+                        <button class="btn btn-warning" title="Remove {{c.courseTitle}} from the list of classes"
+                            type="button">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

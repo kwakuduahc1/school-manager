@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SubscriptionsResolvers } from './class-subscriptions/subscription-resolvers';
 import { HomeComponent } from './components/home/home.component';
 import { ClassSchedulesResolvers } from './exam-schedule/exams-schedule-resolver';
 import { FindProgramTypesResolvers, ProgramTypesResolvers } from './exam-types/program-types-resolver';
-import { ClassesListResolvers, FindClassResolvers } from './classes/class-resolvers';
+import { FindClassResolvers } from './classes/class-resolvers';
 
 const routes: Routes = [
   {
@@ -35,7 +34,10 @@ const routes: Routes = [
     path: 'subscriptions',
     loadChildren: () => import('./class-subscriptions/class-subscriptions.module').then(x => x.ClassSubscriptionsModule)
   },
-
+  {
+    path: 'class-courses',
+    loadChildren: () => import('./class-courses/class-courses.module').then(t => t.ClassCoursesModule)
+  },
   {
     path: 'class-results/:id',
     resolve: {

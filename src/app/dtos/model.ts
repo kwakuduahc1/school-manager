@@ -1,5 +1,4 @@
 import { IUsers } from './IUsers';
-
 export interface AssessmentTypes {
     typesID: number;
     typeName: string;
@@ -66,15 +65,16 @@ export interface ExamResults {
     classAssessments: ClassAssessments;
     students: Students;
 }
-
 export interface ClassSemesters {
     classSemestersID: number;
     classesID: number;
     semestersID: number;
     classes: Classes;
     semesters: Semesters;
+    isActive: boolean;
+    subClass: string;
+    mainName: string;
 }
-
 export interface ResultsVM {
     indexNumber: string;
     fullName: string;
@@ -93,7 +93,6 @@ export interface Students {
     fullName: string;
     indexNumber: string;
 }
-
 export interface Coordinators {
     coordinatorsID: number;
     userID: string;
@@ -102,4 +101,45 @@ export interface Coordinators {
     applicationUser: IUsers;
     programs: Programs;
     fullName: string;
+}
+export interface Courses {
+    coursesID: number;
+    courseCode: string;
+    courseTitle: string;
+    programsID: number;
+    isActive: boolean;
+    selected: boolean;
+    programs: Programs;
+    // attendances: Attendances[];
+    // lectures: Lectures[];
+    classSemesterCourses: ClassSemestersCourses[];
+}
+export interface ClassSemestersCourses {
+    classSemesterCoursesID: number;
+    coursesID: number;
+    courseCode: string;
+    courseTitle: string;
+    semester: number;
+    className: string;
+    mainName: string;
+    classSemestersID: number;
+    isActive: boolean;
+    classSemesters: ClassSemesters;
+    teacherAssignedCourses: TeacherAssignedCourses[];
+}
+export interface TeacherAssignedCourses {
+    teacherAssignedCoursesID: number;
+    classSemesterCoursesID: number;
+    userID: string;
+    userName: string;
+    isActive: boolean;
+    courseCode: string;
+    coursesID: number;
+    semester: number;
+    courseTitle: string;
+    className: string;
+    dateAdded: Date | string;
+    assigner: string;
+    applicationUser: ApplicationUser;
+    classSemestersCourses: ClassSemestersCourses;
 }
