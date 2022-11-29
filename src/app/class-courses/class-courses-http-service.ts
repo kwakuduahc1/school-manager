@@ -28,8 +28,8 @@ export class ClassSemestersCoursesHttpService {
         return this.http.post<ClassSemestersCourses>(APP_CONFIG.url + `ClassSemesterCourses/Edit`, prog);
     }
 
-    delete(id: number): Observable<ClassSemestersCourses> {
-        return this.http.delete<ClassSemestersCourses>(APP_CONFIG.url + `ClassSemesterCourses/Delete/${id}`);
+    delete(course: ClassSemestersCourses): Observable<ClassSemestersCourses> {
+        return this.http.post<ClassSemestersCourses>(APP_CONFIG.url + `ClassSemesterCourses/Delete`, course);
     }
 
     courses(id: number): Observable<Courses[]> {

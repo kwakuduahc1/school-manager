@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { abort } from 'process';
-import { Classes, ClassSemesters, ClassSemestersCourses, Courses } from '../../../dtos/model';
+import { ClassSemesters, ClassSemestersCourses, Courses } from '../../../dtos/model';
 import { ConfirmDialogService } from '../../../providers/confirmation-service';
 import { ClassSemestersCoursesHttpService } from '../../class-courses-http-service';
 
@@ -58,5 +57,19 @@ export class ClassCoursesComponent implements OnInit {
         }
       });
     }
+  }
+
+  remove(c: ClassSemestersCourses) {
+    this.conf.confirm('Do you wish to remove this course from the semester?').subscribe((ans: boolean) => {
+      if (ans) {
+        this.http.delete(c).subscribe(res => {
+          const ix = this.courses.findIndex(p => p.classSemesterCoursesID === c.classSemesterCoursesID);
+          this.courses.splice(ix, 1);
+          this.toast.success('The course was unregistered');
+          const cix = this.list.find(x => x.coursesID === c.coursesID);
+          cix.selected = false;
+        });
+      }
+    });
   }
 }
