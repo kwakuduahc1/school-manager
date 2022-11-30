@@ -140,6 +140,7 @@ export interface TeacherAssignedCourses {
     className: string;
     dateAdded: Date | string;
     assigner: string;
+    teacherName: string;
     applicationUser: ApplicationUser;
     classSemestersCourses: ClassSemestersCourses;
 }

@@ -37,6 +37,7 @@
                     <th>Title</th>
                     <th>Code</th>
                     <th>Remove</th>
+                    <th>Assignment</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,11 @@
                         <button (click)="remove(c)" class="btn btn-warning" title="Remove {{c.courseTitle}} from the list of classes"
                             type="button">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" routerLink="/course-allocations/{{c.classSemesterCoursesID}}" title="Assign teachers to this course" class="btn btn-outline-dark">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i> Assign
                         </button>
                     </td>
                 </tr>

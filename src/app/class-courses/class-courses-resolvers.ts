@@ -23,6 +23,15 @@ export class FindSemesterClassResolvers implements Resolve<ClassSemestersCourses
 }
 
 @Injectable({ providedIn: 'root' })
+export class FindSemesterClassCourseResolvers implements Resolve<ClassSemestersCourses> {
+    constructor(private http: ClassSemestersCoursesHttpService) { }
+
+    resolve(route: ActivatedRouteSnapshot): Observable<ClassSemestersCourses> {
+        return this.http.findClassCourse(parseInt(route.paramMap.get('id') as string, 10));
+    }
+}
+
+@Injectable({ providedIn: 'root' })
 export class ClassCoursesResolvers implements Resolve<Courses[]> {
     constructor(private http: ClassSemestersCoursesHttpService) { }
 

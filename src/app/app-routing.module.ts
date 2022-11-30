@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () => import('./class-courses/class-courses.module').then(t => t.ClassCoursesModule)
   },
   {
+    path: 'course-allocations',
+    loadChildren: () => import('./course-assignment/course-assignment.module').then(t => t.CourseAssignmentModule)
+  },
+  {
     path: 'class-results/:id',
     resolve: {
       class: FindClassResolvers,

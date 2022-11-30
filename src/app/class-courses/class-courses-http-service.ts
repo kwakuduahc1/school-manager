@@ -20,6 +20,10 @@ export class ClassSemestersCoursesHttpService {
         return this.http.get<ClassSemestersCourses>(APP_CONFIG.loginUrl + `ClassSemesters/Find?id=${id}`);
     }
 
+    findClassCourse(id: number): Observable<ClassSemestersCourses> {
+        return this.http.get<ClassSemestersCourses>(APP_CONFIG.url + `ClassSemesterCourses/Find?id=${id}`);
+    }
+
     add(prog: ClassSemestersCourses): Observable<ClassSemestersCourses> {
         return this.http.post<ClassSemestersCourses>(APP_CONFIG.url + `ClassSemesterCourses/Create`, prog);
     }

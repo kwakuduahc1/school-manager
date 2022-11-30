@@ -8,7 +8,7 @@ export class ConfirmDialogService {
     };
 
     confirm(msg: string) {
-        ConfirmationComponent.prototype.msg = msg
+        ConfirmationComponent.prototype.msg = msg;
         return this.modalService.show(ConfirmationComponent).content?.onClose;
     }
 }
