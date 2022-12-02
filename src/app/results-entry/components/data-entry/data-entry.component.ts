@@ -19,8 +19,7 @@ export class DataEntryComponent implements OnInit {
   stds: Students[];
   results: ResultsVM[] = [];
   form: FormGroup;
-  tps: ClassAssessments;
-  cls: Classes;
+  sch: ClassAssessments;
   constructor(
     title: Title,
     route: ActivatedRoute,
@@ -30,11 +29,10 @@ export class DataEntryComponent implements OnInit {
     private conf: ConfirmDialogService) {
     title.setTitle('Home');
     this.stds = route.snapshot.data.students;
-    this.tps = route.snapshot.data.types;
-    this.cls = route.snapshot.data.class;
+    this.sch = route.snapshot.data.sch;
     this.form = new FormGroup({
       std: new FormControl<Students>(null, Validators.compose([Validators.required])),
-      score: new FormControl<number>(null, Validators.compose([Validators.required, Validators.max(this.tps.maxScore)]))
+      score: new FormControl<number>(null, Validators.compose([Validators.required, Validators.max(this.sch.maxScore)]))
     });
   }
 
@@ -50,7 +48,7 @@ export class DataEntryComponent implements OnInit {
         indexNumber: score.std.indexNumber,
         studentsID: score.std.studentsID,
         score: score.score,
-        examID: this.tps.assessmentsID
+        examID: this.sch.assessmentsID
       });
       this.form.reset();
       const elem = document.getElementById('std');

@@ -71,7 +71,6 @@ export class StatusProvider {
   }
 
   setCreds(tkn: { [x: string]: any }) {
-    console.log(tkn);
     this.roles = tkn['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.user = {
       password: '',

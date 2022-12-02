@@ -1,4 +1,5 @@
-<h1 class="h1 text-center text-primary">Results for {{cls.subClass}}</h1>
+<h1 class="h1 text-center text-primary">Semester {{course.semester}} {{course.courseTitle}} results for
+    {{course.className}}</h1>
 <div class="btn-group">
     <button type="button" (click)="print()" title="Print this results" class="btn btn-primary">
         <i class="fa fa-print" aria-hidden="true"></i>
@@ -8,7 +9,7 @@
     </button>
 </div>
 <table id="print" class="table table-striped table-inverse table-responsive">
-    <thead class="thead-inverse">
+    <thead class="thead-dark">
         <tr>
             <th>Name</th>
             <th>Index Number</th>
@@ -16,6 +17,7 @@
             <th>Assignments</th>
             <th>Mid-Semester</th>
             <th>Exam</th>
+            <th>Total</th>
         </tr>
         <tr class="no-print">
             <th colspan="2">
@@ -31,6 +33,9 @@
             <td>{{r.assignment}}</td>
             <td>{{r.midSemester}}</td>
             <td>{{r.examination}}</td>
+            <td>{{
+                r.quizes + r.assignment + r.midSemester + r.examination
+                }}</td>
         </tr>
     </tbody>
 </table>

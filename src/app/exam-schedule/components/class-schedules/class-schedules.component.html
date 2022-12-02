@@ -86,7 +86,7 @@
             <td>{{s.courseTitle}}</td>
             <td>{{s.maxScore}}</td>
             <td>
-                <button type="button" routerLink="/results-entry/home/{{s.assessmentsID}}"
+                <button type="button" routerLink="/results-entry/{{s.assessmentsID}}"
                     routerLinkActive="router-link-active" class="btn btn-outline-secondary"
                     title="Manual data entry for {{s.examName}} for {{course.className}}">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -98,7 +98,7 @@
                 </button>
             </td>
             <td>
-                <button type="button" routerLink="/results-entry/{{course.classesID}}/{{s.assessmentsID}}/view-results" class="btn btn-outline-warning card-button"
+                <button type="button" routerLink="/results-entry/{{s.assessmentsID}}/view-results" class="btn btn-outline-warning card-button"
                     title="View all entries for {{s.examName}} for {{course.className}}">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>

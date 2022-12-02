@@ -51,10 +51,10 @@ const routes: Routes = [
     },
     loadChildren: () => import('./class-results/class-results.module').then(x => x.ClassResultsModule)
   },
-  // {
-  //   path: 'results-entry',
-  //   loadChildren: () => import('./results-entry/results-entry.module').then(x => x.ResultsEntryModule)
-  // },
+  {
+    path: 'results-entry',
+    loadChildren: () => import('./results-entry/results-entry.module').then(x => x.ResultsEntryModule)
+  },
   {
     path: 'exams-schedules/:id',
     resolve: {

@@ -51,6 +51,7 @@ export class ClassSchedulesComponent implements OnInit {
         sch.courseTitle = this.course.courseTitle;
         sch.classesID = this.course.classesID;
         sch.semester = this.course.semester;
+        sch.className = this.course.className;
         sch.teacherAssignedCoursesID = this.course.teacherAssignedCoursesID;
         this.http.add(sch).subscribe((res: ClassAssessments) => {
           this.schs.unshift(res);

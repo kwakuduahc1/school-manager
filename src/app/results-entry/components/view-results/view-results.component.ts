@@ -1,10 +1,9 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ClassAssessments, Classes, ResultsVM, Students } from '../../../dtos/model';
+import { ClassReportVM, TACVm } from '../../../dtos/model';
 import { ActivityProvider } from '../../../providers/ActivityProvider';
 import { ConfirmDialogService } from '../../../providers/confirmation-service';
 import { PrintProviderService } from '../../../providers/print-provider.service';
@@ -17,9 +16,8 @@ import { ResultsHttpService } from '../../results-http-service';
 })
 export class ViewResultsComponent implements OnInit {
 
-  results: ResultsVM[];
-  tps: ClassAssessments;
-  cls: Classes;
+  results: ClassReportVM[];
+  course: TACVm;
   // form: FormGroup;
   constructor(
     title: Title,
@@ -30,9 +28,8 @@ export class ViewResultsComponent implements OnInit {
     private http: ResultsHttpService,
     private conf: ConfirmDialogService) {
     title.setTitle('Home');
-    this.tps = route.snapshot.data.exam;
-    this.cls = route.snapshot.data.class;
-    this.results = route.snapshot.data.results;
+    this.results = route.snapshot.data.results.res;
+    this.course = route.snapshot.data.results.tas;
     // this.form = new FormGroup({
     //   std: new FormControl<Students>(null, Validators.compose([Validators.required])),
     //   score: new FormControl<number>(null, Validators.compose([Validators.required, Validators.max(this.tps.maxScore)]))
@@ -40,7 +37,8 @@ export class ViewResultsComponent implements OnInit {
   }
 
   print() {
-    this.printer.print('print', `${this.tps.examName} results`, true, true, true, 500, true);
+    // eslint-disable-next-line max-len
+    this.printer.print('print', `${this.course.className} ${this.course.courseTitle} semester ${this.course.semester} results for `, true, true, true, 500, true);
   }
   ngOnInit(): void { }
 }

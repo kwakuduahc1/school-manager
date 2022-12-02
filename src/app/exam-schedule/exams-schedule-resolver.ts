@@ -14,10 +14,10 @@ export class ClassSchedulesResolvers implements Resolve<ClassAssessments[]> {
 }
 
 @Injectable({ providedIn: 'root' })
-export class FindClassScheduleTypesResolvers implements Resolve<ClassAssessments> {
+export class FindClassSchedulesResolvers implements Resolve<ClassAssessments> {
     constructor(private http: ExamsScheduleHttpService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<ClassAssessments> {
-        return this.http.find(parseInt(route.paramMap.get('tid') as string, 10));
+        return this.http.find(parseInt(route.paramMap.get('id') as string, 10));
     }
 }

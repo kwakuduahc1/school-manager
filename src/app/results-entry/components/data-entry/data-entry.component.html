@@ -1,12 +1,12 @@
-<h1 class="h1 text-primary text-center" routerLink="/class-results/{{cls.classesID}}">Results entry for {{cls.subClass}}</h1>
-<h2 class="h2 text-center text-infor">{{tps.examName}} - Max: {{tps.maxScore}}</h2>
+<h1 class="h1 text-primary text-center" routerLink="/class-results/{{sch.classesID}}">Results entry for {{sch.className}}</h1>
+<h2 class="h2 text-center text-infor">{{sch.examName}} - Max: {{sch.maxScore}}</h2>
 <form name="form" id="form" [formGroup]="form" (submit)="save(form.value)">
     <fieldset>
         <legend class="text-center"></legend>
         <div class="row g-3">
             <div class="form-floating mb-3 col-sm-3">
                 <ng-select type="text" name="scores" class="form-control" id="std" title="std" formControlName="std">
-                    <ng-option *ngFor="let p of stds" [value]="p">{{p.fullName}}</ng-option>
+                    <ng-option *ngFor="let p of stds" [value]="p">{{p.indexNumber}} - {{p.fullName}}</ng-option>
                 </ng-select>
                 <label
                     [ngClass]="form.controls.std.touched && form.controls.std.invalid  ? 'text-danger' : 'text-success'"

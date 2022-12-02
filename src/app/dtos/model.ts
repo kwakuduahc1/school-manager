@@ -40,6 +40,7 @@ export interface Classes {
     semestersID: number;
 }
 export interface ClassAssessments {
+    className: string;
     assessmentsID: number;
     typesID: number;
     classesID: number;
@@ -155,4 +156,17 @@ export interface TeacherCourseClassVm {
     courseCode: string;
     teacherAssignedCoursesID: number;
     coursesID: number;
+}
+export interface TACVm {
+    classesID: number;
+    teacherAssignedCoursesID: number;
+    courseCode: string;
+    courseTitle: string;
+    semester: number;
+    className: string;
+}
+
+export interface TeacherCourseReport {
+    results: ResultsVM[];
+    course: TACVm;
 }
