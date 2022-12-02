@@ -1,8 +1,9 @@
-<h1 class="h1 text-primary text-center" routerLink="/class-results/{{cls.classesID}}">Results entry for {{cls.subClass}}</h1>
-<h2 class="h2 text-center text-infor">{{tps.typeName}} - Max: {{tps.weight}}</h2>
+<h1 class="h1 text-primary text-center" title="Click to go back home" routerLink="/home">{{course.courseTitle}}
+    schedules for {{course.className}}</h1>
 <form name="form" id="form" [formGroup]="form" (submit)="save(form.value)">
     <fieldset>
-        <legend class="text-center"></legend>
+        <legend class="text-center text-info" title="Fill this form to add a new exams schedule"><i
+                class="fa fa-folder-open-o" aria-hidden="true"></i> New schedule</legend>
         <div class="row g-3">
             <div class="form-floating mb-3 col-sm-3">
                 <input type="text" name="examName" class="form-control" id="examName" title="Add the name of this exam"
@@ -23,38 +24,18 @@
                 </label>
             </div>
             <div class="form-floating mb-3 col-sm-3">
-                <input type="number" name="semester" class="form-control" id="semester" title="semester"
-                    formControlName="semester" placeholder="semester">
+                <select name="typesID" class="form-control" id="typesID" title="typesID" formControlName="typesID"
+                    placeholder="The type of exams you wish to conduct, e.g. quiz 1, mid-semester, objectives for exams, etc.">
+                    <option title="Select {{t.typeName}} as your option" *ngFor="let t of tps"
+                        [ngValue]="t.programsTypesID">
+                        {{t.typeName}}</option>
+                </select>
                 <label
-                    [ngClass]="form.controls.semester.touched && form.controls.semester.invalid  ? 'text-danger' : 'text-success'"
-                    for="semester" aria-label="semester">Semester
+                    [ngClass]="form.controls.typesID.touched && form.controls.typesID.invalid  ? 'text-danger' : 'text-success'"
+                    for="typesID" aria-label="typesID">Type
                     <span>
-                        <small [ngClass]="form.controls.semester.errors?.max ? 'text-danger' : ''"
-                            *ngIf="form.controls.semester.errors?.max">
-                            {{form.controls.semester.errors?.max.max}}/{{form.controls.semester.errors?.max.actual}}</small>
-                        <small [ngClass]="form.controls.semester.errors?.required ? 'text-danger' : ''"
-                            *ngIf="form.controls.semester.errors?.required">*</small>
-                        <small [ngClass]="form.controls.semester.errors?.min ? 'text-danger' : ''"
-                            *ngIf="form.controls.semester.errors?.min">
-                            {{form.controls.semester.errors?.min.min}}/{{form.controls.semester.errors?.min.actual}}</small>
-                    </span>
-                </label>
-            </div>
-            <div class="form-floating mb-3 col-sm-3">
-                <input type="text" name="course" class="form-control" id="course" title="course"
-                    formControlName="course" placeholder="Course">
-                <label
-                    [ngClass]="form.controls.course.touched && form.controls.course.invalid  ? 'text-danger' : 'text-success'"
-                    for="course" aria-label="course">Course                    
-                    <span>
-                        <small [ngClass]="form.controls.course.errors?.minLength ? 'text-danger' : ''"
-                            *ngIf="form.controls.course.errors?.minLength">
-                            {{form.controls.course.errors?.max.minLength}}/{{form.controls.course.errors?.max.actualLength}}</small>
-                        <small [ngClass]="form.controls.course.errors?.required ? 'text-danger' : ''"
-                            *ngIf="form.controls.course.errors?.required">*</small>
-                        <small [ngClass]="form.controls.course.errors?.maxlength ? 'text-danger' : ''"
-                            *ngIf="form.controls.course.errors?.maxLength">
-                            {{form.controls.course.errors?.min.maxlength}}/{{form.controls.course.errors?.min.actuallength}}</small>
+                        <small [ngClass]="form.controls.typesID.errors?.required ? 'text-danger' : ''"
+                            *ngIf="form.controls.typesID.errors?.required">*</small>
                     </span>
                 </label>
             </div>
@@ -93,37 +74,32 @@
         <tr>
             <th>Exam</th>
             <th>Course</th>
-            <th>Semester</th>
             <th>Max Score</th>
-            <td>Date</td>
-            <th>Upload</th>
             <th>Manual</th>
+            <th>Upload</th>
             <th>View</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let s of schs; let ix = index">
             <td scope="row">{{s.examName}}</td>
-            <td>{{s.course}}</td>
-            <td>{{s.semester}}</td>
+            <td>{{s.courseTitle}}</td>
             <td>{{s.maxScore}}</td>
-            <td>{{s.dateAdded |date}}</td>
             <td>
-                <button type="button" class="btn btn-outline-success" title="Upload results using a template">
-                    <i class="fa fa-upload" aria-hidden="true"></i>
-                </button>
-
-            </td>
-            <td>
-                <button type="button" routerLink="/results-entry/home/{{cls.classesID}}/{{s.assessmentsID}}"
+                <button type="button" routerLink="/results-entry/home/{{s.assessmentsID}}"
                     routerLinkActive="router-link-active" class="btn btn-outline-secondary"
-                    title="Manual data entry for {{s.examName}} for {{cls.subClass}}">
+                    title="Manual data entry for {{s.examName}} for {{course.className}}">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
             </td>
             <td>
-                <button type="button" routerLink="/results-entry/{{cls.classesID}}/{{s.assessmentsID}}/view-results" class="btn btn-outline-warning card-button"
-                    title="View all entries for {{s.examName}} for {{cls.subClass}}">
+                <button type="button" class="btn btn-outline-success" title="Upload results using a template">
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+                </button>
+            </td>
+            <td>
+                <button type="button" routerLink="/results-entry/{{course.classesID}}/{{s.assessmentsID}}/view-results" class="btn btn-outline-warning card-button"
+                    title="View all entries for {{s.examName}} for {{course.className}}">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </td>

@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TeacherClasses } from '../../class-subscriptions/model';
 import { SubscriptionsHttpService } from '../../class-subscriptions/subscription-http-service';
-import { Programs } from '../../dtos/model';
+import { Programs, TeacherAssignedCourses } from '../../dtos/model';
 import { ActivityProvider } from '../../providers/ActivityProvider';
 import { ConfirmDialogService } from '../../providers/confirmation-service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HomeComponent implements OnInit {
 
-  classes: TeacherClasses[];
+  courses: TeacherAssignedCourses[];
 
   constructor(
     title: Title,
@@ -25,19 +25,19 @@ export class HomeComponent implements OnInit {
     private http: SubscriptionsHttpService,
     private conf: ConfirmDialogService) {
     title.setTitle('Home');
-    this.classes = route.snapshot.data.classes;
+    this.courses = route.snapshot.data.courses;
   }
 
   ngOnInit(): void { }
 
-  unsus(tcl: TeacherClasses) {
-    this.conf.confirm('You would have to re-suscribe to the class').subscribe((ans: boolean) => {
-      if (ans) {
-        this.http.remove(tcl).subscribe(() => {
-          this.toast.success('You unsuscribed from the class');
-          tcl.isActive = !tcl.isActive;
-        });
-      }
-    });
-  }
+  // unsus(tcl: TeacherClasses) {
+  //   this.conf.confirm('You would have to re-suscribe to the class').subscribe((ans: boolean) => {
+  //     if (ans) {
+  //       this.http.remove(tcl).subscribe(() => {
+  //         this.toast.success('You unsuscribed from the class');
+  //         tcl.isActive = !tcl.isActive;
+  //       });
+  //     }
+  //   });
+  // }
 }

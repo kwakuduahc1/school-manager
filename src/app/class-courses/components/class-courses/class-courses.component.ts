@@ -47,7 +47,8 @@ export class ClassCoursesComponent implements OnInit {
             coursesID: c.coursesID,
             courseTitle: c.courseTitle,
             isActive: true,
-            semester: this.cls.semestersID
+            semester: this.cls.semestersID,
+            classesID: this.cls.classesID
           } as unknown as ClassSemestersCourses;
           this.http.add(csc).subscribe(res => {
             this.toast.success('The course was registered for the semester');

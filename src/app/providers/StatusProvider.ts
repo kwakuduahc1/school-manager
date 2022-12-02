@@ -39,7 +39,7 @@ export class StatusProvider {
     this.token = null;
     localStorage.clear();
     this.user = undefined;
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
     if (initiated) { this.toast.success('You have successfully signed out'); }
     else { this.toast.info('Your previous session has expired'); }
   }
@@ -71,10 +71,11 @@ export class StatusProvider {
   }
 
   setCreds(tkn: { [x: string]: any }) {
+    console.log(tkn);
     this.roles = tkn['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.user = {
       password: '',
-      id: tkn['http://schemas.microsoft.com/ws/2008/06/identity/claims/id'],
+      id: tkn.id,
       confirmPassword: '',
       fullName: tkn.FullName,
       usersID: tkn['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],

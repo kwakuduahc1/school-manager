@@ -8,8 +8,8 @@ import { APP_CONFIG } from '../../environments/environment';
 export class ExamsScheduleHttpService {
     constructor(private http: HttpClient) { }
 
-    list(tid: number, cid: number): Observable<ClassAssessments[]> {
-        return this.http.get<ClassAssessments[]>(APP_CONFIG.url + `ExamsSchedule/List?tid=${tid}&cid=${cid}`);
+    list(id: number): Observable<ClassAssessments[]> {
+        return this.http.get<ClassAssessments[]>(APP_CONFIG.url + `ExamsSchedule/List?id=${id}`);
     }
 
     find(id: number): Observable<ClassAssessments> {

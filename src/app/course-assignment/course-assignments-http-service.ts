@@ -13,6 +13,10 @@ export class CourseAssignmentsHttpService {
         return this.http.get<TeacherAssignedCourses[]>(APP_CONFIG.url + `TeacherCourses/List?id=${id}`);
     }
 
+    myList(): Observable<TeacherAssignedCourses[]> {
+        return this.http.get<TeacherAssignedCourses[]>(APP_CONFIG.url + `TeacherCourses/MyCourses`);
+    }
+
     add(tas: TeacherAssignedCourses): Observable<TeacherAssignedCourses> {
         return this.http.post<TeacherAssignedCourses>(APP_CONFIG.url + `TeacherCourses/Create`, tas);
     }

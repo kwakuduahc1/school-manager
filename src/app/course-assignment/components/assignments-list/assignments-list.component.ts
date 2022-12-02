@@ -45,7 +45,8 @@ export class AssignmentsListComponent implements OnInit {
           semester: this.course.semester,
           teacherName: t.fullName,
           userID: t.usersID,
-          userName: t.userName
+          userName: t.userName,
+          classesID: this.course.classesID
         } as unknown as TeacherAssignedCourses;
         this.http.add(crs).subscribe(res => {
           this.tchrs.unshift(res);

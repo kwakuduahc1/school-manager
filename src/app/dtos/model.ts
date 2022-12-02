@@ -44,18 +44,18 @@ export interface ClassAssessments {
     typesID: number;
     classesID: number;
     examName: string;
-    course: string;
+    semester: number;
     maxScore: number;
-    semesterID: number;
+    courseTitle: string;
+    courseCode: string;
+    teacherAssignedCoursesID: number;
     dateAdded: Date | string;
     userID: string;
     userName: string;
     assessmentTypes: AssessmentTypes;
     applicationUser: ApplicationUser;
-    classes: Classes;
-    semester: number;
-    semesters: Semesters;
     examResults: ExamResults[];
+    teacherAssignedCourses: TeacherAssignedCourses;
 }
 export interface ExamResults {
     examResultsID: number;
@@ -122,6 +122,7 @@ export interface ClassSemestersCourses {
     semester: number;
     className: string;
     mainName: string;
+    classesID: string;
     classSemestersID: number;
     isActive: boolean;
     classSemesters: ClassSemesters;
@@ -135,6 +136,7 @@ export interface TeacherAssignedCourses {
     isActive: boolean;
     courseCode: string;
     coursesID: number;
+    classesID: number;
     semester: number;
     courseTitle: string;
     className: string;
@@ -143,4 +145,14 @@ export interface TeacherAssignedCourses {
     teacherName: string;
     applicationUser: ApplicationUser;
     classSemestersCourses: ClassSemestersCourses;
+}
+export interface TeacherCourseClassVm {
+    semester: number;
+    classesID: number;
+    programsID: number;
+    className: string;
+    courseTitle: string;
+    courseCode: string;
+    teacherAssignedCoursesID: number;
+    coursesID: number;
 }

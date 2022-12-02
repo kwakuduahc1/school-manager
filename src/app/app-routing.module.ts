@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ClassSchedulesResolvers } from './exam-schedule/exams-schedule-resolver';
 import { FindProgramTypesResolvers, ProgramTypesResolvers } from './exam-types/program-types-resolver';
 import { FindClassResolvers } from './classes/class-resolvers';
+import { MyCourseAssignmentListResolver } from './course-assignment/course-assignments-resolvers';
+import { FindSemesterClassCourseResolvers } from './class-courses/class-courses-resolvers';
 
 const routes: Routes = [
   {
@@ -15,7 +17,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     resolve: {
-      // classes: ClassesListResolvers
+      courses: MyCourseAssignmentListResolver
     }
   },
   {
@@ -45,20 +47,18 @@ const routes: Routes = [
   {
     path: 'class-results/:id',
     resolve: {
-      class: FindClassResolvers,
       types: ProgramTypesResolvers
     },
     loadChildren: () => import('./class-results/class-results.module').then(x => x.ClassResultsModule)
   },
+  // {
+  //   path: 'results-entry',
+  //   loadChildren: () => import('./results-entry/results-entry.module').then(x => x.ResultsEntryModule)
+  // },
   {
-    path: 'results-entry',
-    loadChildren: () => import('./results-entry/results-entry.module').then(x => x.ResultsEntryModule)
-  },
-  {
-    path: 'schedule/:id/:tid',
+    path: 'exams-schedules/:id',
     resolve: {
-      class: FindClassResolvers,
-      types: FindProgramTypesResolvers,
+      types: ProgramTypesResolvers,
       schedules: ClassSchedulesResolvers
     },
     loadChildren: () => import('./exam-schedule/exam-schedule.module').then(x => x.ExamScheduleModule)

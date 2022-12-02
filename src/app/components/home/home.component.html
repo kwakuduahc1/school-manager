@@ -1,21 +1,18 @@
 <h1 class="h1 text-primary text-center">Your subscriptions</h1>
 <div class="row">
-    <div class="card col-sm-4" *ngFor="let c of classes">
+    <div class="card col-sm-4" *ngFor="let c of courses">
         <div class="card-body">
-            <h4 class="card-title">{{c.subClass}}</h4>
-            <p class="card-subtitle text-muted">{{c.students}} students</p>
+            <h4 class="card-title">{{c.courseTitle}}</h4>
+            <p class="card-subtitle">{{c.className}}</p>
         </div>
         <div class="card-body">
-            <button type="button" [routerLink]="['/class-results', c.classesID]" routerLinkActive="router-link-active"
-                [disabled]="!c.isActive" class="btn btn-outline-secondary" title="View results for {{c.subClass}}">
-                <i class="fa fa-list-alt" aria-hidden="true"></i> Data entry
+            <button type="button" [routerLink]="['/exams-schedules', c.teacherAssignedCoursesID]"
+                [disabled]="act.isProcessing" class="btn btn-secondary" title="Schedule exams for {{c.className}}">
+                <i class="fa fa-list-alt" aria-hidden="true"></i> Results
             </button>
-            <button type="button" class="btn btn-outline-light" routerLink="/results-entry/class-report/{{c.classesID}}" [disabled]="!c.isActive || act.isProcessing" title="view the report for {{c.subClass}}">
+            <button type="button" class="btn btn-info" routerLink="/results-entry/class-report/{{c.classesID}}"
+                [disabled]="act.isProcessing" title="view the report for {{c.className}}">
                 <i class="fa fa-list-alt" aria-hidden="true"></i> Report
-            </button>
-            <button type="button" (click)="unsus(c)" class="btn btn-outline-warning card-button"
-                title="Unscubscribe from the class">
-                <i class="fa fa-trash-o" aria-hidden="true"></i> Unsuscribe
             </button>
         </div>
     </div>

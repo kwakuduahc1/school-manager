@@ -24,3 +24,13 @@ export class TeachersForCourseAssignmentListResolver implements Resolve<IUsers[]
         return this.http.teachers(parseInt(route.paramMap.get('id') as string, 10));
     }
 }
+
+@Injectable({ providedIn: 'root' })
+export class MyCourseAssignmentListResolver implements Resolve<TeacherAssignedCourses[]> {
+
+    constructor(private http: CourseAssignmentsHttpService) { }
+
+    resolve(): Observable<TeacherAssignedCourses[]> {
+        return this.http.myList();
+    }
+}

@@ -4,9 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProgramTypes, Classes, ClassAssessments } from '../../../dtos/model';
+import { ProgramTypes, ClassAssessments, ClassSemestersCourses, TeacherCourseClassVm } from '../../../dtos/model';
 import { ActivityProvider } from '../../../providers/ActivityProvider';
 import { ConfirmDialogService } from '../../../providers/confirmation-service';
+import { StatusProvider } from '../../../providers/StatusProvider';
 import { ExamsScheduleHttpService } from '../../exam-schedule-http';
 
 @Component({
@@ -18,25 +19,24 @@ export class ClassSchedulesComponent implements OnInit {
 
   schs: ClassAssessments[];
   form: FormGroup;
-  tps: ProgramTypes;
-  cls: Classes;
+  tps: ProgramTypes[];
+  course: TeacherCourseClassVm;
   constructor(
     title: Title,
     route: ActivatedRoute,
     public act: ActivityProvider,
     private toast: ToastrService,
+    private status: StatusProvider,
     private http: ExamsScheduleHttpService,
     private conf: ConfirmDialogService) {
-    title.setTitle('Home');
-    this.tps = route.snapshot.data.types;
-    this.cls = route.snapshot.data.class;
+    title.setTitle('Exams schedule');
+    this.tps = route.snapshot.data.types.types;
+    this.course = route.snapshot.data.types.course;
     this.schs = route.snapshot.data.schedules;
     this.form = new FormGroup({
-      examName: new FormControl<string>(`${this.tps.typeName} ${this.schs.length + 1}`,
-        Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(35)])),
-      semester: new FormControl('', Validators.compose([Validators.required, Validators.min(1), Validators.max(6)])),
-      maxScore: new FormControl('', Validators.compose([Validators.required, Validators.min(5), Validators.max(100)])),
-      course: new FormControl<string>(``,Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(75)])),
+      examName: new FormControl<string>(null, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(35)])),
+      maxScore: new FormControl(10, Validators.compose([Validators.required, Validators.min(5), Validators.max(100)])),
+      typesID: new FormControl('', Validators.compose([Validators.required])),
     });
   }
 
@@ -46,9 +46,12 @@ export class ClassSchedulesComponent implements OnInit {
   save(sch: ClassAssessments) {
     this.conf.confirm(`A new entry as ${sch.examName} will be added?`).subscribe((ans: boolean) => {
       if (ans) {
-        sch.userID = '867419eb-f62e-4959-90dd-9754661da084';
-        sch.classesID = this.cls.classesID;
-        sch.typesID = this.tps.typesID;
+        sch.userID = this.status.user.usersID;
+        sch.courseCode = this.course.courseCode;
+        sch.courseTitle = this.course.courseTitle;
+        sch.classesID = this.course.classesID;
+        sch.semester = this.course.semester;
+        sch.teacherAssignedCoursesID = this.course.teacherAssignedCoursesID;
         this.http.add(sch).subscribe((res: ClassAssessments) => {
           this.schs.unshift(res);
           this.toast.success('The schedule was added');

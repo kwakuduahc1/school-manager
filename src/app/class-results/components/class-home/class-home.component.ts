@@ -2,10 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Classes, ProgramTypes } from '../../../dtos/model';
+import { ProgramTypes, TeacherCourseClassVm } from '../../../dtos/model';
 import { ActivityProvider } from '../../../providers/ActivityProvider';
-import { ConfirmDialogService } from '../../../providers/confirmation-service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'bs-class-home',
@@ -14,17 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ClassHomeComponent implements OnInit {
 
-  cls: Classes;
+  course: TeacherCourseClassVm;
   types: ProgramTypes[];
   constructor(
     title: Title,
     route: ActivatedRoute,
-    public act: ActivityProvider,
-    private toast: ToastrService,
-    private conf: ConfirmDialogService) {
-    title.setTitle('Class report');
-    this.cls = route.snapshot.data.class;
-    this.types = route.snapshot.data.types;
+    public act: ActivityProvider) {
+    title.setTitle('Course info');
+    this.course = route.snapshot.data.types.course;
+    this.types = route.snapshot.data.types.types;
   }
 
   ngOnInit(): void {

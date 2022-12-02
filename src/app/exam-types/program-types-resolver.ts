@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProgramTypes } from '../dtos/model';
-import { ProgramTypesHttpService } from './exam-types-http';
+import { ProgramTypesHttpService, TypesCourses } from './exam-types-http';
 
 @Injectable({ providedIn: 'root' })
-export class ProgramTypesResolvers implements Resolve<ProgramTypes[]> {
+export class ProgramTypesResolvers implements Resolve<TypesCourses[]> {
     constructor(private http: ProgramTypesHttpService) { }
 
-    resolve(route: ActivatedRouteSnapshot): Observable<ProgramTypes[]> {
+    resolve(route: ActivatedRouteSnapshot): Observable<TypesCourses[]> {
         return this.http.list(parseInt(route.paramMap.get('id') as string, 10));
     }
 }
