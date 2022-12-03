@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FindClassResolvers } from '../classes/class-resolvers';
 import { FindClassSchedulesResolvers } from '../exam-schedule/exams-schedule-resolver';
 import { ClassReportComponent } from './components/class-report/class-report.component';
 import { DataEntryComponent } from './components/data-entry/data-entry.component';
@@ -22,7 +21,8 @@ const routes: Routes = [
     path: ':id/view-results',
     component: ViewResultsComponent,
     resolve: {
-      results: ViewResultsResolvers
+      results: ViewResultsResolvers,
+      course: FindClassSchedulesResolvers
     }
   },
   {

@@ -66,7 +66,6 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     NgxFontAwesomeModule,
     HttpClientModule,
-    NgPipesModule,
     ToastrModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: APP_CONFIG.production,

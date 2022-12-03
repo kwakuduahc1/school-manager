@@ -1,4 +1,4 @@
-<h1 class="h1 text-center text-primary">{{course.className}} semester {{course.semester}} results for {{course.courseTitle}}</h1>
+<h1 class="h1 text-center text-primary">{{course.courseTitle}} {{course.typeName}} results for {{course.className}}</h1>
 <button type="button" (click)="print()" title="Print this results" class="btn btn-primary">
     <i class="fa fa-print" aria-hidden="true"></i>
 </button>
@@ -22,10 +22,50 @@
             <td>{{r.indexNumber}}</td>
             <td>{{r.score}}</td>
             <td class="no-print">
-                <button type="button" title="Edit results" class="btn btn-outline-secondary">
-                    <i class="fa fa-pencil-square" aria-hidden="true"></i> Edit
+                <button type="button" (click)="openModal(r, score)" title="Edit results" class="btn btn-primary">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
                 </button>
             </td>
         </tr>
     </tbody>
 </table>
+
+<ng-template #score class="modal-lg">
+    <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left text-center">
+            Edit results for {{std.indexNumber}}
+        </h4>
+    </div>
+    <div class="modal-body">
+        <form name="form" id="form" [formGroup]="form" (submit)="save(form.controls.score.value)">
+            <div class="row g-3">
+                <div class="form-floating mb-3 col-lg-8">
+                    <input type="number" class="form-control" id="score" title="Enter the updated score"
+                        formControlName="score" placeholder="Score">
+                    <label
+                        [ngClass]="form.controls.score.touched && form.controls.score.invalid  ? 'text-danger' : 'text-success'"
+                        for="score" aria-label="The new score for the student"> Score
+                        <span>
+                            <small [ngClass]="form.controls.score.errors?.max ? 'text-danger' : ''"
+                                *ngIf="form.controls.score.errors?.max">
+                                {{form.controls.score.errors?.max.max}}/{{form.controls.score.errors?.max.actual}}
+                            </small>
+                            <small [ngClass]="form.controls.score.errors?.required ? 'text-danger' : ''"
+                                *ngIf="form.controls.score.errors?.required">*</small>
+                            <small [ngClass]="form.controls.score.errors?.min ? 'text-danger' : ''"
+                                *ngIf="form.controls.score.errors?.min">
+                                {{form.controls.score.errors?.min.min}}/{{form.controls.score.errors?.min.actual}}
+                            </small>
+                        </span>
+                    </label>
+                </div>
+                <div class="col-sm-1">
+                    <button title="Save changes" [disabled]="form.invalid || act.isProcessing || form.untouched || form.pristine" type="submit"
+                        [ngClass]="form.invalid ? 'btn-outline-danger' : 'btn-outline-success'" class="btn">
+                        <i class="fa fa-save"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

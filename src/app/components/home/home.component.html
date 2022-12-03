@@ -4,6 +4,7 @@
         <div class="card-body">
             <h4 class="card-title">{{c.courseTitle}}</h4>
             <p class="card-subtitle">{{c.className}}</p>
+            <p class="card-subtitle">Semester {{c.semester}}</p>
         </div>
         <div class="card-body">
             <button type="button" [routerLink]="['/exams-schedules', c.teacherAssignedCoursesID]"

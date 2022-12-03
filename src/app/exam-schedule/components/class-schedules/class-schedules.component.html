@@ -73,16 +73,18 @@
     <thead class="thead-inverse">
         <tr>
             <th>Exam</th>
+            <th>Type</th>
             <th>Course</th>
             <th>Max Score</th>
-            <th>Manual</th>
-            <th>Upload</th>
+            <th>Add</th>
+            <!-- <th>Upload</th> -->
             <th>View</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let s of schs; let ix = index">
             <td scope="row">{{s.examName}}</td>
+            <td>{{s.typeName}}</td>
             <td>{{s.courseTitle}}</td>
             <td>{{s.maxScore}}</td>
             <td>
@@ -92,11 +94,11 @@
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
             </td>
-            <td>
+            <!-- <td>
                 <button type="button" class="btn btn-outline-success" title="Upload results using a template">
                     <i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
-            </td>
+            </td> -->
             <td>
                 <button type="button" routerLink="/results-entry/{{s.assessmentsID}}/view-results" class="btn btn-outline-warning card-button"
                     title="View all entries for {{s.examName}} for {{course.className}}">

@@ -45,10 +45,7 @@ const routes: Routes = [
     loadChildren: () => import('./course-assignment/course-assignment.module').then(t => t.CourseAssignmentModule)
   },
   {
-    path: 'class-results/:id',
-    resolve: {
-      types: ProgramTypesResolvers
-    },
+    path: 'class-results',
     loadChildren: () => import('./class-results/class-results.module').then(x => x.ClassResultsModule)
   },
   {

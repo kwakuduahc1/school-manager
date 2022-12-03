@@ -12,6 +12,10 @@ export class ResultsHttpService {
         return this.http.post<ResultsVM[]>(APP_CONFIG.url + `Results/Upload`, res);
     }
 
+    edit(res: ResultsVM): Observable<ResultsVM> {
+        return this.http.post<ResultsVM>(APP_CONFIG.url + `Results/Edit`, res);
+    }
+
     view(id: number): Observable<ClassReportVM[]> {
         return this.http.get<ClassReportVM[]>(APP_CONFIG.url + `Results/List?id=${id}`);
     }

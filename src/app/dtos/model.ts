@@ -45,6 +45,7 @@ export interface ClassAssessments {
     typesID: number;
     classesID: number;
     examName: string;
+    typeName: string;
     semester: number;
     maxScore: number;
     courseTitle: string;
@@ -169,4 +170,24 @@ export interface TACVm {
 export interface TeacherCourseReport {
     results: ResultsVM[];
     course: TACVm;
+}
+
+export interface FnClassReport {
+    studentsID: number;
+    indexNumber: string;
+    fullName: string;
+    quizes: number;
+    assignment: number;
+    midSemester: number;
+    examination: number;
+    courseTitle: string;
+    courseCode: string;
+    coursesID: number;
+    classSemestersID: number;
+    classSemesterCoursesID: number;
+}
+
+export interface ClassSemesterCourseReport {
+    res: FnClassReport[];
+    csc: TACVm;
 }
